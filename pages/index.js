@@ -1,2 +1,2 @@
-const Home = props => <div>Welcome to the home page!</div>
+const Home = props => <div>Welcome to the Pokedex home page!</div>
 export default Home
