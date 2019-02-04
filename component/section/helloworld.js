@@ -1,3 +1,3 @@
-const HelloWorld = <div>Hello world!</div>
+const HelloWorld = props => <div>Hello world!</div>
 
 export default HelloWorld
