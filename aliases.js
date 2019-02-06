@@ -4,7 +4,8 @@ const root = path.resolve('./')
 
 
 const aliases = {
-  component : `${root}/component`
+  component : `${root}/component`,
+  utils : `${root}/utils`,
 }
 
 

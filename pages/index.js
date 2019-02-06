@@ -1,12 +1,8 @@
-import HelloWorld from 'component/section/helloworld'
+import TargetContainer from 'component/container/target-container'
 
 const Home = props =>
-<div>Welcome to the Pokedex home page!
-  <HelloWorld/>
-  <p>
-    Write your name:
-    <input placeholder="Your name here"/>
-  </p>
-  <a href="www.google.com">Go to Google Here</a>
+<div>
+  <h1>Pokemon:</h1>
+  <TargetContainer/>
 </div>
 export default Home
