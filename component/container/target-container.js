@@ -1,19 +1,24 @@
 import { useState } from 'react'
 import Target from 'component/section/target'
-import useDebounce from 'utils/hooks/use-debounce'
+import { fetchByID, fetchByName } from 'utils/api'
 
-const TargetContainer = ({ id = '---', name = 'Fetching...' }) => {
+
+
+const TargetContainer = () => {
   const [ pokemonID, setPokemonID ] = useState(0)
   const [ pokemonName, setPokemonName ] = useState('')
-  const [ pokemon, setPokemon ] = useState({id, name, data: null})
+  const [ pokemon, setPokemon ] = useState({})
+
 
   return (
     <Target
-      findByID={e => setPokemonID(e.target.value) }
-      findByName={e => setPokemonName(e.target.value) }
-      pokemon={ pokemon }/>
+      id={ pokemonID }
+      pokemon={ pokemon }
+      name={ pokemonName }
+      setPokemonID={ e => setPokemonID(e.target.value) }
+      setPokemonName={ e => setPokemonName(e.target.value) }
+      setPokemon={ foundPokemon => setPokemon(foundPokemon) } />
     )
 }
-
 
 export default TargetContainer

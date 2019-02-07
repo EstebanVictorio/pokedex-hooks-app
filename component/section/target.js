@@ -1,21 +1,33 @@
-import { useState, useEffect } from 'react'
 import withLayout from 'component/hoc/with-layout'
+import DebouncedInput from 'component/container/debounced-input'
+import styled from 'styled-components'
+import PropTypes from 'prop-types'
 
-const Target = ( {findByID, findByName, pokemon} ) =>
-  <div>
-    <div>
-      <label>ID:</label>
-      <input onChange={ findByID }/>
+const Target = props => {
+  let {className, id, name, setPokemonID, setPokemonName, pokemon = {} } = props
+  return (
+    <div className={className}>
+      <img src={ '' } alt='---'/>
+      <DebouncedInput delay={ 1 } labelText='ID' value={ id }
+        onChange={ setPokemonID } effects={ [] }/>
+      <DebouncedInput delay={ 1 } labelText='Name' value={ name }
+        onChange={ setPokemonName } effects={ [] }/>
     </div>
-    <div>
-      <label>Name:</label>
-      <input onChange={ findByName }/>
-    </div>
-    <pre>
-      {
-        JSON.stringify(pokemon)
-      }
-    </pre>
-  </div>
+  )
+}
 
-export default withLayout(Target)
+Target.defaultProps = {
+  value: '',
+}
+
+
+
+const StyledTarget = styled(Target)`
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+`
+
+export default withLayout(StyledTarget)

@@ -9,6 +9,7 @@ const plugins = [
       root: [
         path.resolve('./component'),
         path.resolve('./utils'),
+        path.resolve('./entity'),
       ],
       alias
     }

@@ -1,21 +1,26 @@
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import DebounceAgent from 'entity/agent/debounce-agent'
 
 
-const cleanupDebounce = timeout => {
-  clearTimeout(timeout)
-  console.log('Cleanup debounce')
+const areImmediateEffects = effects =>
+  effects.filter(effect => typeof(effect.then) === 'undefined').length === 0
+
+
+
+
+const onDebounce = effects => {
+  if(areImmediateEffects(effects)){
+    effects.map(effect => effect())
+  }else{
+  }
 }
 
-const useDebounce = (value, delay, onDebounce) => {
-  const usedDebouncedEffect = false
-
+const useDebounce = (value, delay, effects) => {
   useEffect(() => {
     let timeout =
-      setTimeout(() => usedDebouncedEffect = onDebounce(value), delay)
-    return () => cleanupDebounce(timeout)
+      setTimeout(() => onDebounce(effects), delay * 1000)
+    return () => clearTimeout(timeout)
   }, [value])
-
-  return usedDebouncedEffect
 }
 
 export default useDebounce
