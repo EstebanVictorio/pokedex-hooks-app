@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import withLayout from 'component/hoc/with-layout'
 
-const Target = ({findByID, findByName, pokemon}) =>
+const Target = ( {findByID, findByName, pokemon} ) =>
   <div>
     <div>
       <label>ID:</label>
