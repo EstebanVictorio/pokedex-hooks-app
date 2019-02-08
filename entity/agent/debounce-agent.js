@@ -3,11 +3,11 @@ const ASYNC = 'ASYNC'
 
 class DebounceAgent {
 
-  constructor(subject, effects = []){
+  constructor(subject, actions = []){
     this.action = null
     this.promise = null
     this.subject = subject
-    this.effects = effects
+    this.actions = actions
     this.currentEffect = 0
   }
 
@@ -15,18 +15,21 @@ class DebounceAgent {
     thenable.then()
   }
 
-  determineRuntimeMode(){
-
-    switch (expression) {
+  setAction(){
+    switch (determineRuntimeMode()) {
       case ASYNC:
-        this.action = ( )
+        this.action = () => this.invokeThenable(this.subject)
         break
       case SYNC:
       default:
         this.action = this.subject
         break
-
     }
+  }
+
+  determineRuntimeMode(){
+    return typeof(this.subject.then) !== 'undefined' &&
+      typeof(this.subject.then) === 'function' ? ASYNC : SYNC
   }
 
   dispatch(){
