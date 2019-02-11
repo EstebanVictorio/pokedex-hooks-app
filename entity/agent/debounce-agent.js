@@ -1,38 +1,32 @@
+import Doppler from 'utils/hooks/doppler'
+
 const SYNC = 'SYNC'
 const ASYNC = 'ASYNC'
 
 class DebounceAgent {
 
-  constructor(subject, actions = []){
-    this.action = null
-    this.promise = null
-    this.subject = subject
-    this.actions = actions
-    this.currentEffect = 0
+  constructor(runnables){
+    this.runnables = runnables
+    this.dispatch = this.getAction()
   }
 
-  invokeThenable(thenable){
-    thenable.then()
-  }
-
-  setAction(){
-    switch (determineRuntimeMode()) {
-      case ASYNC:
-        this.action = () => this.invokeThenable(this.subject)
-        break
-      case SYNC:
-      default:
-        this.action = this.subject
-        break
-    }
+  getAction(){
+    return determineRuntimeMode() === ASYNC ? 
+      () => this.invokeDoppler() : 
+      () => this.runnables.map(runnable => runnable())
   }
 
   determineRuntimeMode(){
-    return typeof(this.subject.then) !== 'undefined' &&
-      typeof(this.subject.then) === 'function' ? ASYNC : SYNC
+    let isAsync = 
+      typeof(this.runnables.async) !== 'undefined' && (this.runnables.async.filter(runnable => typeof(runnable.then) === 'function' ||
+        runnable.constructor === 'AsyncConstructor')
+      ).length > 0
+    return isAsync ? ASYNC : SYNC
   }
 
-  dispatch(){
-    this.action()
+  invokeDoppler(){
+    
   }
+
+  
 }
