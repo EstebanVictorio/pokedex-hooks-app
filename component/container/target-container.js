@@ -5,35 +5,24 @@ import { getPokemonByID, getPokemonByName } from 'utils/api'
 
 
 
-const idEffects = (value, setPokemon) => {
+const searchEffects = (value, setPokemon) => {
   getPokemonByID(value)
     .then(response => response.json().catch(err => console.log(err)))
     .then(json => setPokemon(json))
     .catch(err => console.log(error))
 }
 
-const nameEffects = (value, setPokemon) => {
-  getPokemonByName(value)
-  .then(response => response.json().catch(err => console.log(err)))
-  .then(json => setPokemon(json))
-  .catch(err => console.log(error))
-}
-
 const TargetContainer = () => {
-  const [ pokemonID, setPokemonID ] = useState('')
-  const [ pokemonName, setPokemonName ] = useState('')
+  const [ pokemonSearch, setPokemonSearch ] = useState('')
   const [ pokemon, setPokemon ] = useState({})
   console.log('Render')
   return (
     <Target
-      id={ pokemonID }
+      search={ pokemonSearch }
       pokemon={ pokemon }
-      name={ pokemonName }
-      setPokemonID={ e => setPokemonID(e.target.value) }
-      setPokemonName={ e => setPokemonName(e.target.value) }
+      setPokemonSearch={ e => setPokemonSearch(e.target.value) }
       setPokemon={ setPokemon } 
-      idEffects={idEffects}
-      nameEffects={nameEffects}/>
+      searchEffects={searchEffects}/>
     )
 }
 
